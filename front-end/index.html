@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Messaging</title>
     <style>
         html,
@@ -63,7 +62,37 @@
         <p id="received-message">This is a demo of what a received message would look like</p>
     </div>
 
-    <textarea id="textbox-overlay" placeholder="Message here"></textarea>
+    <script>
+        function createMessage(inputMessage) {
+            const message = document.createElement("p");
+            message.textContent = inputMessage;
+            message.id = "my-message";
+
+            const messageArea = document.getElementById("message-area");
+            messageArea.appendChild(message);
+        }
+
+        function textAreaUpdate() {
+            const messageBox = document.getElementById("textbox-overlay");
+            const messageLength = messageBox.textLength;
+            const message = messageBox.value;
+            if (messageLength === 0) {
+                return;
+            }
+
+            if (message === "\n") {  // shift-enter check?
+                messageBox.value = "";
+                return;
+            }
+
+            if (message[messageLength-1] == '\n') {
+                createMessage(message);
+                messageBox.value = "";
+            }
+        }
+    </script>
+
+    <textarea id="textbox-overlay" autofocus="true" placeholder="Message here" oninput="textAreaUpdate()"></textarea>
 </body>
 
 </html>
