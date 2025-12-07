@@ -1,7 +1,6 @@
 # Bluetooth Messaging App
 Requirements
 - python
-- pycryptodome
 
 
 Run the following commands to complete setup
@@ -18,4 +17,6 @@ to re-enter the virtual environment:
 to run the program:  
 `python3 crypto/crypto.py`  
 
-This hosts an http server on port 1919
+This hosts an http server on port 1919 for api endpoints
+
+The web-page can be loaded directly by opening index.html in a browser
