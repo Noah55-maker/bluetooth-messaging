@@ -72,6 +72,15 @@
             messageArea.appendChild(message);
         }
 
+        function receiveMessage(inputMessage) {
+            const message = document.createElement("p");
+            message.textContent = inputMessage;
+            message.id = "received-message";
+
+            const messageArea = document.getElementById("message-area");
+            messageArea.appendChild(message);
+        }
+
         function textAreaUpdate() {
             const messageBox = document.getElementById("textbox-overlay");
             const messageLength = messageBox.textLength;
@@ -80,7 +89,7 @@
                 return;
             }
 
-            if (message === "\n") {  // shift-enter check?
+            if (message === "\n") {
                 messageBox.value = "";
                 return;
             }
