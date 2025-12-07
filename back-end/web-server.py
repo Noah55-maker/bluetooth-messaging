@@ -1,27 +1,22 @@
 import asyncio
 from websockets.asyncio.server import serve
 
-sockets = set()
+async def toLocal(message):
+    await my_socket.send(message)
 
-async def echo(websocket):
-    sockets.add(websocket)
+async def fromLocal(message):
+    print(message)
+    pass
+
+async def handle(websocket):
+    global my_socket
+    my_socket = websocket
 
     async for message in websocket:
-        toRemove = []
-        for socket in sockets:
-            # check for clos{ing, ed} sockets
-            if socket.state == 2 or socket.state == 3:
-                toRemove.append(socket)
-                continue
-            if socket != websocket:
-                await socket.send(message)
-
-        # remove closed sockets
-        for s in toRemove:
-            sockets.remove(s)
+        await fromLocal(message)
 
 async def main():
-    async with serve(echo, "localhost", 10000) as server:
-        await server.serve_forever()
+    async with serve(handle, "localhost", 10000):
+        await asyncio.Future()
 
 asyncio.run(main())

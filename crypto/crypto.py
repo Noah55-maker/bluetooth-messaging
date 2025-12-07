@@ -88,11 +88,3 @@ class handler(BaseHTTPRequestHandler):
 
 with HTTPServer(('', 1919), handler) as server:
     server.serve_forever()
-
-
-key = bytearray(16)
-for i in range(16):
-    key[i] = random.randint(0, 255)
-
-n, c, t = encryptString("Secret message", key)
-print(decryptString(key, n, c, t))
