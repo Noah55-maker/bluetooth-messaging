@@ -24,6 +24,7 @@ def decrypt(key, nonce, ciphertext, tag):
         print("the message is authentic")
     except ValueError:
         print("Bad message")
+        return bytes(0)
 
     return plaintext
 
